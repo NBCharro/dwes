@@ -1,0 +1,43 @@
+.factura {
+	width: 60%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 15px;
+}
+
+h1 {
+	text-align: center;
+}
+
+th {
+	background-color: lightgray;
+}
+
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: auto;
+	height: 35px;
+	text-align: center;
+}
+
+table {
+	margin-bottom: 40px;
+}
+
+th,
+td {
+	width: 125px;
+}
+
+.modelo {
+	width: 300px;
+}
+
+img {
+	width: 200px;
+	display: block;
+	margin: 15px auto;
+}

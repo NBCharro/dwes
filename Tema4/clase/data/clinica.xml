@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinica>
+  <nombre>MasQueMascotas</nombre>
+  <propietario>Ana Maria Sanz Fernandez</propietario>
+  <mascotas>
+	  <mascota id="001" sexo="m">
+		<nombre>Prince</nombre>
+		<especie>perro</especie>
+		<raza>bulldog</raza>
+		<nacimiento>2012</nacimiento>
+		<foto>../images/prince.jpg</foto>
+	  </mascota>
+	  <mascota id="002" sexo="M">
+		<nombre>Rufo</nombre>
+		<especie>gato</especie>
+		<raza>siamés</raza>
+		<nacimiento>2018</nacimiento>
+		<foto>../images/rufo.jpg</foto>
+	  </mascota>
+	  <mascota id="003" sexo="m">
+		<nombre>Flucho</nombre>
+		<especie>perro</especie>
+		<raza>pointer</raza>
+		<nacimiento>2011</nacimiento>
+		<foto/>
+	  </mascota>
+	  <mascota id="004" sexo="h">
+		<nombre>Flequi</nombre>
+		<especie>caballo</especie>
+		<raza>gypsy vanner</raza>
+		<nacimiento>2009</nacimiento>
+		<foto>../images/flequi.jpg</foto>
+	  </mascota>
+	  <mascota id="005" sexo="H">
+		<nombre>Dona</nombre>
+		<especie>gato</especie>
+		<raza>europeo</raza>
+		<nacimiento>2015</nacimiento>
+		<foto/>
+	  </mascota>
+	  <mascota id="006" sexo="H">
+		<nombre>Grease</nombre>
+		<especie>gato</especie>
+		<raza>siamés</raza>
+		<nacimiento>2017</nacimiento>
+		<foto>../images/grease.jpg</foto>
+	  </mascota>
+	  <mascota id="007" sexo="h">
+		<nombre>Dita</nombre>
+		<especie>perro</especie>
+		<raza>bulldog francés</raza>
+		<nacimiento>2010</nacimiento>
+		<foto>../images/dita.jpg</foto>
+	  </mascota>
+	  <mascota id="008" sexo="M">
+		<nombre>Bigotes</nombre>
+		<especie>conejo</especie>
+		<raza>enano belier</raza>
+		<nacimiento>2014</nacimiento>
+		<foto>../images/bigotes.jpg</foto>
+	  </mascota>
+	<mascota id="009" sexo="m"><nombre>Jose</nombre><especie>caballo</especie><raza>Trotante</raza><nacimiento>2020</nacimiento><foto/></mascota><mascota id="010" sexo="h"><nombre>Pececito</nombre><especie>otra</especie><raza>Pez</raza><nacimiento>2015</nacimiento><foto/></mascota><mascota id="011" sexo="m"><nombre>Belarmino</nombre><especie>perro</especie><raza>perro grande</raza><nacimiento>2020</nacimiento><foto/></mascota></mascotas>
+</clinica>

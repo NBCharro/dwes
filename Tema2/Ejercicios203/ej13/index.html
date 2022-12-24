@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="CSS/style.css">
+	<title>Ejercicio 13</title>
+</head>
+<body>
+	<form action="./php/formulario.php" method="post">
+		<label for="nombre">Nombre:</label>
+		<input type="text" name="nombre"/><br/>
+		<label for="apellidos">Apellidos:</label>
+		<input type="text" name="apellidos"/><br/>
+		<label for="direccion">Direccion:</label>
+		<input type="text" name="direccion"/><br/>
+		<label for="telefono">Telefono:</label>
+		<input type="tel" name="telefono"/><br/>
+		<label for="sexo">Sexo:</label>
+		<input type="radio" value="masculino" name="sexo">Masculino
+		<input type="radio" value="femenino" name="sexo">Femenino
+		<input type="radio" value="No contesta" name="sexo" checked>No contesta <br>
+		<input type="submit" value="Enviar" name="enviar"/>
+	</form>
+</body>
+</html>

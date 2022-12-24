@@ -1,0 +1,7 @@
+2022-12-15 16:47:05,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,16.3
+2022-12-15 16:47:09,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,16.3
+2022-12-15 16:47:12,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,16.3
+2022-12-15 16:47:14,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,16.3
+ ,user1, , , , ,-65.2
+2022-12-15 16:47:20,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,6.3
+2022-12-15 16:47:51,user1,Maxi,Rellena,Carbonara, pollo bacon jamon cebolla aceitunas pimiento,16.3

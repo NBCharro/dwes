@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 16</title>
+    <style>
+        textarea{
+            width: 99%;
+        }
+    </style>
+  </head>
+  <body>
+    <h2>Formatos en Texto</h2>
+    <form action="./php/formulario.php" method="post">
+      <label for="textoGrande">Texto:</label><br />
+      <textarea name="textoGrande" cols="80" rows="10"></textarea>
+      <fieldset>
+        <legend>Caracteristicas del borde:</legend>
+        <label for="tamaño">Tamaño:</label>
+        <input type="number" min="0" value="0" name="tamaño"/><br />
+        <label for="estilo">Estilo:</label>
+        <select name="estilo">
+          <option value="solid">Liso</option>
+          <option value="double">Doble</option>
+          <option value="dotted">Punteado</option>
+          <option value="hidden">Oculto</option>
+        </select>
+        <label for="color">Color:</label>
+        <select name="color">
+          <option value="black">Negro</option>
+          <option value="red">Rojo</option>
+          <option value="blue">Azul</option>
+          <option value="yellow">Amarillo</option>
+        </select>
+      </fieldset>
+      <input type="submit" value="Enviar" name="enviar" />
+    </form>
+  </body>
+</html>

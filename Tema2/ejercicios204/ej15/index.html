@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 15</title>
+  </head>
+  <body>
+    <form action="./php/formulario.php" method="post">
+      <label for="num1">Numero 1:</label>
+      <input type="number" name="num1" value="0" /><br />
+      <label for="num1">Numero 2:</label>
+      <input type="number" name="num2" value="0" /><br />
+      <label for="operacion">Operacion</label>
+      <input type="radio" name="operacion" value="suma" />Suma
+      <input type="radio" name="operacion" value="resta" />Resta
+      <input
+        type="radio"
+        name="operacion"
+        value="multiplicacion"
+      />Multiplicacion
+      <input type="radio" name="operacion" value="division" />Division
+      <input type="radio" name="operacion" value="modulo" />Modulo
+      <br />
+      <input type="submit" value="Enviar" name="enviar" />
+    </form>
+  </body>
+</html>

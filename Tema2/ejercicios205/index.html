@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 17</title>
+	<link rel="stylesheet" href="./CSS/style.css">
+  </head>
+  <body>
+    <form action="./php/formulario.php" class="formulario">
+        <h1>Configure su PC</h1>
+		<table>
+			<tr>
+				<td class="nombre">
+					<label for="placaBase" >Placa Base</label>
+				</td>
+				<td class="opciones">
+					<select name="placaBase">
+					  <option value="Gigabyte B560M DS3H V2">Gigabyte B560M DS3H V2 (93,99 €)</option>
+					  <option value="MSI B450M PRO-VDH Max">MSI B450M PRO-VDH Max (84,99 €)</option>
+					  <option value="Asus TUF GAMING B550-PLUS WIFI II">Asus TUF GAMING B550-PLUS WIFI II (179,85 €)</option>
+					  <option value="Asus TUF GAMING B450-PLUS II">Asus TUF GAMING B450-PLUS II (101,89 €)</option>
+					</select><br>
+				</td>
+			</tr>
+			<tr>
+				<td class="nombre">
+					<label for="procesador">Procesador</label>
+				</td>
+				<td class="opciones">
+					<select name="procesador">
+					  <option value="Intel Core i5-8600 3.1GHz Box">Intel Core i5-8600 3.1GHz Box (242,41 €)</option>
+					  <option value="AMD Ryzen 7 2700X 3.7 Ghz">AMD Ryzen 7 2700X 3.7 Ghz (532,90 €)</option>
+					</select><br>
+				</td>
+			</tr>
+			<tr>
+				<td class="nombre">
+					<label for="memoria">Memoria</label>
+				</td>
+				<td class="opciones"> 
+					<select name="memoria">
+					  <option value="8GB">8GB (34,99 €)</option>
+					  <option value="16GB">16GB (70,99 €)</option>
+					  <option value="32GB">32GB (115,99 €)</option>
+					  <option value="64GB">64GB (202,99 €)</option>
+					</select><br>
+				</td>
+			</tr>
+			<tr>
+				<td class="nombre">
+					<label for="discoDuro">Disco Duro</label>
+				</td>
+				<td class="opciones">					
+					<select name="discoDuro">
+					  <option value="HDD 1TB">HDD 1TB (45,05 €)</option>
+					  <option value="SSD 512GB">SSD 512GB (90 €)</option>
+					</select><br>
+				</td>
+			</tr>
+			<tr>
+				<td class="nombre">
+					<label for="tarjetaGrafica">Tarjeta Grafica</label>
+				</td>
+				<td class="opciones">
+					<select name="tarjetaGrafica">
+					  <option value="Gigabyte GeForce RTX 3060">Gigabyte GeForce RTX 3060 (459,99 €)</option>
+					  <option value="MSI RTX 3060 TI VENTUS 2X">MSI RTX 3060 TI VENTUS 2X (331,08 €)</option>
+					  <option value="MSI GeForce RTX 2060 VENTUS GP">MSI GeForce RTX 2060 VENTUS GP (345,09 €)</option>
+					  <option value="ninguna">Ninguna(0 €)</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value="Enviar" name="enviar" class="botonEnviar">
+    </form>
+  </body>
+</html>
