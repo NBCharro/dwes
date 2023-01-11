@@ -57,8 +57,8 @@ class HolaControlador extends Controller
         $texto .= " $numero3";
         $total += $numero3;
         $texto .= " ) = $total";
-        $total = sumarNumeros($numero1, $numero2, $numero3);
-        $texto = textoSuma($numero1, $numero2, $numero3, $total);
+        // $total = sumarNumeros($numero1, $numero2, $numero3);
+        // $texto = textoSuma($numero1, $numero2, $numero3, $total);
         return view('suma', ['texto' => $texto]);
     }
 
