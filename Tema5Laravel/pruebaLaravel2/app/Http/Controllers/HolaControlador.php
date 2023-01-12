@@ -8,7 +8,23 @@ class HolaControlador extends Controller
 {
     public function raiz()
     {
-        return view('inicio', ['titulo' => '<h1>Página Principal</h1>']);
+        $paginas = ['Inicio', 'Articulos', 'Clientes', 'Facturas'];
+        $paginasBidimensional = ['inicio' => 'Inicio', 'saludo' => 'Saludo', 'suma' => 'Suma'];
+        $pedidos = [];
+        // $pedidos = ["articulo1", "articulo2", "articulo3"];
+        $pedidosBidimensional = [
+            ['num' => 101, 'producto' => 'Camisa', 'precio' => 49.95],
+            ['num' => 102, 'producto' => 'Pantalón', 'precio' => 79.95],
+            ['num' => 103, 'producto' => 'Sudadera', 'precio' => 29.95],
+            ['num' => 104, 'producto' => 'Chandal', 'precio' => 69.95],
+        ];
+        return view('inicio', [
+            'titulo' => '<h1>Página Principal</h1>',
+            'paginas' => $paginas,
+            'paginasBidimensional' => $paginasBidimensional,
+            'pedidos' => $pedidos,
+            'pedidosBidimensional' => $pedidosBidimensional
+        ]);
     }
 
     public function saludo($nombre = "", $apellido = "")
