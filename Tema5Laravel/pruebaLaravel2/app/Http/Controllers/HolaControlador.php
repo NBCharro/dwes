@@ -8,7 +8,7 @@ class HolaControlador extends Controller
 {
     public function raiz()
     {
-        return view('mensaje', ['texto' => 'Página Principal']);
+        return view('inicio', ['titulo' => '<h1>Página Principal</h1>']);
     }
 
     public function saludo($nombre = "", $apellido = "")
