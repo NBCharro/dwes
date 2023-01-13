@@ -20,4 +20,5 @@ Route::get('/', [HolaControlador::class, 'raiz'])->name("inicio");
 Route::match(['get', 'post'], '/saludo/{nombre?}/{apellido?}', [HolaControlador::class, 'saludo'])->name("saludo");
 
 // Route::get('/suma/{numero1?}/{numero2?}/{numero3?}', [HolaControlador::class, 'suma'])->name("suma");
-Route::match(['get', 'post'], '/suma/{numero1?}/{numero2?}/{numero3?}', [HolaControlador::class, 'suma'])->name("suma");
+// Route::match(['get', 'post'], '/suma/{numero1?}/{numero2?}/{numero3?}', [HolaControlador::class, 'suma'])->name("suma");
+Route::match(['get', 'post'], '/suma/{numero1?}/{numero2?}/{numero3?}', [HolaControlador::class, 'sumaClases'])->name("suma");

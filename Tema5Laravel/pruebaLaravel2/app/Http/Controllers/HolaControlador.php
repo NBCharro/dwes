@@ -73,33 +73,26 @@ class HolaControlador extends Controller
         $texto .= " $numero3";
         $total += $numero3;
         $texto .= " ) = $total";
-        // $total = sumarNumeros($numero1, $numero2, $numero3);
-        // $texto = textoSuma($numero1, $numero2, $numero3, $total);
         return view('suma', ['texto' => $texto]);
     }
 
-    private function sumarNumeros($numero1 = "", $numero2 = "", $numero3 = "")
+    public function sumaClases($numero1 = 0, $numero2 = 0, $numero3 = 0)
     {
-        $total = 0;
-        $total += $numero1;
-        $total += $numero2;
-        $total += $numero3;
-        return $total;
-    }
+        if (isset(request()->numero1)) {
+            $numero1 = request()->numero1;
+        }
+        if (isset(request()->numero2)) {
+            $numero2 = request()->numero2;
+        }
+        if (isset(request()->numero3)) {
+            $numero3 = request()->numero3;
+        }
 
-    private function textoSuma($numero1 = "", $numero2 = "", $numero3 = "", $total)
-    {
-        $texto = "Suma (";
-        $texto .= " $numero1";
-        if ($numero1 != "" && $numero2 != "") {
-            $texto .= " + ";
-        }
-        $texto .= " $numero2";
-        if (($numero2 != "" || $numero1 != "") && $numero3 != "") {
-            $texto .= " + ";
-        }
-        $texto .= " $numero3";
-        $texto .= " ) = $total";
-        return $texto;
+        $claseSuma = new Suma($numero1, $numero2, $numero3);
+        $total = $claseSuma->getTotal();
+        $textoSuma = $claseSuma->textoSuma();
+        $texto = "Suma ($textoSuma) = $total";
+
+        return view('suma', ['texto' => $texto]);
     }
 }
