@@ -1,6 +1,9 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
+use App\CustomClasses\Suma;
 
 use Illuminate\Http\Request;
 
