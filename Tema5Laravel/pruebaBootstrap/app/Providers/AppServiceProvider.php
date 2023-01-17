@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Convierte en mayusculas usando @mayus
+     * Transforma el texto en mayusculas
      *
      * @return void
      */

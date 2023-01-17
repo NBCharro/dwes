@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 @section('pageTitle', 'Saludo')
 @section('pageContent')
-    <h1>{{ $texto }}</h1>
+    <h1>@mayus($texto)</h1>
     <ul>
         <li>
             <a href="{{ Route('inicio') }}">Incio</a>
