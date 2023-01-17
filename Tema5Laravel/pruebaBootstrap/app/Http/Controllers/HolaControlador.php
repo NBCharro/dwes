@@ -12,7 +12,6 @@ class HolaControlador extends Controller
     }
     public function empresa()
     {
-
         return view("empresa");
     }
     public function articulos()

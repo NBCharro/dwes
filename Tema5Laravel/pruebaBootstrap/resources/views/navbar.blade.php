@@ -3,16 +3,19 @@
         <div id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('inicio') }}">Inicio</a>
+                    <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{ route('inicio') }}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('empresa') }}">Empresa</a>
+                    <a class="nav-link {{ Route::is('empresa') ? 'active' : '' }}"
+                        href="{{ route('empresa') }}">Empresa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articulos') }}">Artículos</a>
+                    <a class="nav-link {{ Route::is('articulos') ? 'active' : '' }}"
+                        href="{{ route('articulos') }}">Artículos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contacto') }}">Contacto</a>
+                    <a class="nav-link {{ Route::is('contacto') ? 'active' : '' }}"
+                        href="{{ route('contacto') }}">Contacto</a>
                 </li>
             </ul>
         </div>
