@@ -7,3 +7,7 @@
     width: 75px;
     height: 75px;
 }
+
+#cabecera {
+    background-image: url("../images/bolaDisco.png");
+}
