@@ -1,0 +1,22 @@
+.main-header {
+    background-image: url(/images/banner.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    min-height:100px;
+    max-height:140px;
+}
+
+.menu-item {
+    font-size: large;
+    color: white;
+}
+
+.text-table {
+    font-size: large;
+    vertical-align: middle;
+}
+
+.text-footer {
+    font-size: large;
+}
