@@ -15,3 +15,5 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'inicio'])->name('inicio');
+
+Route::resource('articulos', 'App\Http\Controllers\ArticuloController');

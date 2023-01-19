@@ -14,6 +14,14 @@
 
 <body>
     <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ route('inicio') }}">
+                Inicio
+            </a>
+            <a class="navbar-brand" href="{{ route('articulos.index') }}">
+                Mostrar Artículos
+            </a>
+        </nav>
         @yield('content-area')
     </div>
 </body>

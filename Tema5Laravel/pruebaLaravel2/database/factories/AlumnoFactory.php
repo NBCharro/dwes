@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Articulo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Alumno>
  */
-class ArticuloFactory extends Factory
+class AlumnoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,6 +23,7 @@ class ArticuloFactory extends Factory
             'envio' => $this->faker->randomElement(['S', 'N']),
             'stock' => $this->faker->numberBetween(0, 10000),
             'observaciones' => $this->faker->optional->paragraph(3),
+            'imagen' => $this->faker->imageUrl($width = 640, $height = 480),
         ];
     }
 }

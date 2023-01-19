@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 50)->unique();
             $table->text('descripcion');
-            $table->string('color', 20);
             $table->float('precio', 7, 2)->unsigned();
             $table->enum('envio', ['S', 'N']);
             $table->integer('stock')->unsigned();
