@@ -15,7 +15,8 @@ class Articulo extends Model
         'precio',
         'envio',
         'stock',
-        'observaciones'
+        'observaciones',
+        "imagen"
     ];
     protected $hidden = [];
 }

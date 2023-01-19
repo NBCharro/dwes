@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articulo;
+use App\Models\Disco;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class ArticuloController extends Controller
+class DiscoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::all();
-        return view('articulos.listar')->with(['articulos' => $articulos]);
+        $discos = Disco::all();
+        return view('discos.listar')->with(['discos' => $discos, "nombre" => "TopDiscos"]);
     }
 
     /**
@@ -43,21 +42,21 @@ class ArticuloController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Articulo  $articulo
+     * @param  \App\Models\Disco  $disco
      * @return \Illuminate\Http\Response
      */
-    public function show(Articulo $articulo)
+    public function show(Disco $disco)
     {
-        return view('articulos.mostrar-articulo')->with(['articulo' => $articulo]);
+        return view ('discos.mostrar-disco')->with(['disco'=>$disco, "nombre" => "TopDiscos"]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Articulo  $articulo
+     * @param  \App\Models\Disco  $disco
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articulo $articulo)
+    public function edit(Disco $disco)
     {
         //
     }
@@ -66,10 +65,10 @@ class ArticuloController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articulo  $articulo
+     * @param  \App\Models\Disco  $disco
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articulo $articulo)
+    public function update(Request $request, Disco $disco)
     {
         //
     }
@@ -77,10 +76,10 @@ class ArticuloController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Articulo  $articulo
+     * @param  \App\Models\Disco  $disco
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articulo $articulo)
+    public function destroy(Disco $disco)
     {
         //
     }

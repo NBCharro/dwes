@@ -7,11 +7,9 @@
             <tr>
                 <th>#</th>
                 <th>Artículo</th>
-                <th>Descripción</th>
                 <th>Precio</th>
-                <th>Envío</th>
-                <th>Stock</th>
-                <th>Observaciones</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -19,11 +17,13 @@
                 <tr>
                     <td>{{ $articulo->id }}</td>
                     <td>{{ $articulo->nombre }}</td>
-                    <td>{{ $articulo->descripcion }}</td>
                     <td class="text-nowrap">@priceformat($articulo->precio)</td>
-                    <td>{{ $articulo->envio }}</td>
-                    <td>{{ $articulo->stock }}</td>
-                    <td>{{ $articulo->observaciones }}</td>
+                    <td><img src="{{ $articulo->imagen }}" alt="{{ $articulo->nombre }}" class="imagenTabla"></td>
+                    <td>
+                        <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}">
+                            <span class="material-icons">search</span>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
