@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'inicio'])->name("inicio");
 Route::get('/empresa', [MainController::class, 'empresa'])->name("empresa");
-Route::get('/discos', [MainController::class, 'discos'])->name("discos");
+// Route::get('/discos', [MainController::class, 'discos'])->name("discos");
 Route::get('/contacto', [MainController::class, 'contacto'])->name("contacto");
+
+Route::resource('discos', 'App\Http\Controllers\DiscoController');

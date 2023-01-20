@@ -6,8 +6,8 @@
                     class="nav-link menu-item {{ Route::is('inicio') ? 'active' : '' }}">Inicio</a></li>
             <li class="nav-item"><a href="{{ route('empresa') }}"
                     class="nav-link menu-item {{ Route::is('empresa') ? 'active' : '' }}">Empresa</a></li>
-            <li class="nav-item"><a href="{{ route('discos') }}"
-                    class="nav-link menu-item {{ Route::is('discos') ? 'active' : '' }}">Discos</a></li>
+            <li class="nav-item"><a href="{{ route('discos.index') }}"
+                    class="nav-link menu-item {{ Route::is('discos.index') ? 'active' : '' }}">Discos</a></li>
             <li class="nav-item"><a href="{{ route('contacto') }}"
                     class="nav-link menu-item {{ Route::is('contacto') ? 'active' : '' }}">Contacto</a></li>
         </ul>

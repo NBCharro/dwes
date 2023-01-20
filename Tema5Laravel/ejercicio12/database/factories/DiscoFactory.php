@@ -21,7 +21,7 @@ class DiscoFactory extends Factory
             'autor' => $this->faker->name(50),
             'genero' => $this->faker->text(20),
             'temporada' => $this->faker->year(),
-            'caratula' => $this->faker->imageUrl($width = 640, $height = 480),
+            'caratula' => $this->faker->imageUrl($width = 200, $height = 200),
         ];
     }
 }

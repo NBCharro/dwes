@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($discos as $disco)
+                    {{-- @foreach ($discos as $disco)
                         <?php
                         $id = $disco['id'];
                         $ruta = url('/images') . "/{$id}.png";
@@ -28,7 +28,7 @@
                             <td class='text-table align-middle'>{{ $disco['genero'] }}</td>
                             <td class='text-table align-middle'>{{ $disco['anio'] }}</td>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
