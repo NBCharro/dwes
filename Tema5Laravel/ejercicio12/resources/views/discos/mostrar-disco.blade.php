@@ -56,7 +56,7 @@
             <strong class="text-danger">DESCRIPCION: </strong>
         </div>
         <div class="col-sm-10">
-            {{ $disco->descripcion }}
+            {{ $disco->descripcion ? $disco->descripcion : 'Sin descripcion' }}
         </div>
     </div>
     <div class="row">

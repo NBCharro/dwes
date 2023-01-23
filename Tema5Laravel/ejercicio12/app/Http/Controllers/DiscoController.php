@@ -14,8 +14,12 @@ class DiscoController extends Controller
      */
     public function index()
     {
-        $discos = Disco::all();
-        return view('discos.listar')->with(['discos' => $discos, "nombre" => "TopDiscos"]);
+        try {
+            $discos = Disco::all();
+            return view('discos.listar')->with(['discos' => $discos, "nombre" => "TopDiscos"]);
+        } catch (\Throwable $e) {
+            return view('error')->with(["error" => "No se ha podido acceder a la base de datos, intentelo de nuevo mas tarde", "nombre" => "TopDiscos"]);
+        }
     }
 
     /**
@@ -47,7 +51,7 @@ class DiscoController extends Controller
      */
     public function show(Disco $disco)
     {
-        return view ('discos.mostrar-disco')->with(['disco'=>$disco, "nombre" => "TopDiscos"]);
+        return view('discos.mostrar-disco')->with(['disco' => $disco, "nombre" => "TopDiscos"]);
     }
 
     /**
