@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('titulo', 100);
             $table->string('autor', 50);
-            $table->string('genero', 20);
+            $table->enum('genero', ["Pop", "Rock", "Rap", "Heavy", "Indie", "Otros"]);
             $table->year('temporada');
-            $table->string('caratula', 100);
+            $table->string('caratula');
+            $table->string('descripcion')->nullable();
+            $table->float('precio', 6, 2, true);
             $table->timestamps();
         });
     }

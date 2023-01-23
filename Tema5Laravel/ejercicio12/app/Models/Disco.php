@@ -15,6 +15,8 @@ class Disco extends Model
         'genero',
         'temporada',
         'caratula',
+        'descripcion',
+        'precio',
     ];
     protected $hidden = [];
 }
