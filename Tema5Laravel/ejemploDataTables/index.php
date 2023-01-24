@@ -7,7 +7,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ejemplo Data Tables</title>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+	</style>
 </head>
 
 <body>
@@ -493,11 +505,13 @@
 			</tr>
 		</tfoot>
 	</table>
+
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
+	</script>
 </body>
-<script>
-	$(document).ready(function() {
-		$('#example').DataTable();
-	});
-</script>
+
 
 </html>

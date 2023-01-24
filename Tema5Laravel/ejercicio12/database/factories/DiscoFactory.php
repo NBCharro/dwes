@@ -17,11 +17,13 @@ class DiscoFactory extends Factory
     public function definition()
     {
         return [
-            'titulo' => $this->faker->company(100),
-            'autor' => $this->faker->name(50),
-            'genero' => $this->faker->text(20),
+            'titulo' => $this->faker->words(5, true),
+            'autor' => $this->faker->name(),
+            'genero' => $this->faker->randomElement(["Pop", "Rock", "Rap", "Heavy", "Indie", "Otros"]),
             'temporada' => $this->faker->year(),
-            'caratula' => $this->faker->imageUrl($width = 200, $height = 200),
+            'caratula' => $this->faker->imageUrl(100, 100, "music", true),
+            'descripcion' => $this->faker->optional->paragraph(3),
+            'precio' => $this->faker->randomFloat(2, 0, 99),
         ];
     }
 }
