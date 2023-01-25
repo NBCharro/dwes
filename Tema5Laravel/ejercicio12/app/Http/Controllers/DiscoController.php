@@ -29,7 +29,14 @@ class DiscoController extends Controller
      */
     public function create()
     {
-        //
+        $discos = Disco::all(['genero']);
+        $generos = [];
+        foreach ($discos as $disco) {
+            if (!in_array($disco->genero, $generos)) {
+                $generos[] = $disco->genero;
+            }
+        }
+        return view('discos.nuevo')->with(["nombre" => "TopDiscos", 'generos' => $generos]);
     }
 
     /**
@@ -40,7 +47,28 @@ class DiscoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reglas = [
+            'titulo' => 'required|max:100',
+            'autor' => 'required|max:50',
+            'genero' => 'required|in:Pop,Rock,Rap,Heavy,Indie,Otros',
+            'temporada' => 'required',
+            'caratula' => 'required',
+            'precio' => 'required|gte:0',
+
+        ];
+        $request->validate($reglas);
+
+        Disco::create([
+            'titulo' => $request->titulo,
+            'autor' => $request->autor,
+            'genero' => $request->genero,
+            'temporada' => $request->temporada,
+            'caratula' => $request->caratula,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+        ]);
+
+        return view('discos.guardado')->with(["nombre" => "TopDiscos", 'disco' => $request->titulo, 'autor' => $request->autor]);
     }
 
     /**

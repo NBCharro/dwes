@@ -2,7 +2,7 @@
 @section('page-title', 'Discos')
 @section('content-area')
     <h1>Catálogo de Discos</h1>
-    <table class="table table-striped" id="tablaDiscos">
+    <table class="table table-striped" id="miTabla">
         <thead class='bg-secondary text-white'>
             <tr>
                 <th>IMAGEN</th>

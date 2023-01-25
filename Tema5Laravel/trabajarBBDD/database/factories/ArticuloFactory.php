@@ -23,7 +23,7 @@ class ArticuloFactory extends Factory
             'envio' => $this->faker->randomElement(['S', 'N']),
             'stock' => $this->faker->numberBetween(0, 10000),
             'observaciones' => $this->faker->optional->paragraph(3),
-            'imagen' => $this->faker->imageUrl($width = 640, $height = 480),
+            // 'imagen' => $this->faker->imageUrl($width = 640, $height = 480),
         ];
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('envio', ['S', 'N']);
             $table->integer('stock')->unsigned();
             $table->text('observaciones')->nullable();
-            $table->text('imagen');
+            // $table->text('imagen');
             $table->timestamps();
         });
     }

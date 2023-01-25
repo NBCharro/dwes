@@ -26,7 +26,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+        return view('articulos.nuevo');
     }
 
     /**
@@ -37,7 +37,44 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validacion
+        $reglas = [
+            'nombre' => 'required|max:50|unique:articulos,nombre',
+            'descripcion' => 'required',
+            'precio' => 'required|gte:0',
+            'stock' => 'required|gte:0',
+            'envio' => 'required|in:N,S',
+        ];
+        // Si no valida vuelve al formulario automaticamente
+        $request->validate($reglas);
+        // Cuando se valida se guarda en la BD
+
+        // Metodo largo, por si tenemos que hacer algun cambio como trim()
+        // $articulo = new Articulo();
+        // $articulo->nombre = $request->form_nombre;
+        // $articulo->descripcion = $request->form_descripcion;
+        // $articulo->precio = $request->form_precio;
+        // $articulo->envio = $request->form_envio;
+        // $articulo->stock = $request->form_stock;
+        // $articulo->observaciones = $request->form_observaciones;
+        // $articulo->save();
+
+        // Metodo corto. Los campos en el formulario deberian ser iguales que en la tabla
+        // Articulo::create($request->all());
+
+        // Metodo intermedio. Es una mezcla, usando el create pero sin usar el objeto. Es mas usado.
+        Articulo::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'envio' => $request->envio,
+            'stock' => $request->stock,
+            'observaciones' => $request->observaciones,
+        ]);
+
+        // Una vez guardado en la BD vamos a otra vista
+        // return view('articulos.guardado')->with(['articulo' => $request->form_nombre]);
+        return view('articulos.guardado')->with(['articulo' => $request->nombre]);
     }
 
     /**

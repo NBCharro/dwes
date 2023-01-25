@@ -12,7 +12,14 @@
                     ">Discos</a>
             </li>
             <li class="nav-item"><a href="{{ route('contacto') }}"
-                    class="nav-link menu-item {{ Route::is('contacto') ? 'active' : '' }}">Contacto</a></li>
+                class="nav-link menu-item {{ Route::is('contacto') ? 'active' : '' }}">Contacto</a>
+            </li>
+            <li class="nav-item"><a href="{{ route('discos.create') }}"
+                    class="nav-link menu-item
+                        {{ Route::is('discos.create') ? 'active' : '' }}
+                    ">Agregar</a>
+            </li>
+
         </ul>
     </nav>
 </header>
