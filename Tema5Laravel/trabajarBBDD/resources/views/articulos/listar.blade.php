@@ -8,7 +8,7 @@
                 <th>#</th>
                 <th>Artículo</th>
                 <th>Precio</th>
-                <th>Imagen</th>
+                <th>Descripcion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -18,7 +18,8 @@
                     <td>{{ $articulo->id }}</td>
                     <td>{{ $articulo->nombre }}</td>
                     <td class="text-nowrap">@priceformat($articulo->precio)</td>
-                    <td><img src="{{ $articulo->imagen }}" alt="{{ $articulo->nombre }}" class="imagenTabla"></td>
+                    {{-- <td><img src="{{ $articulo->imagen }}" alt="{{ $articulo->nombre }}" class="imagenTabla"></td> --}}
+                    <td>{{ $articulo->descripcion }}</td>
                     <td>
                         <a href="{{ route('articulos.show', ['articulo' => $articulo]) }}">
                             <span class="material-icons">search</span>
