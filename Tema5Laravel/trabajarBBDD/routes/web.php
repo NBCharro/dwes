@@ -15,5 +15,6 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'inicio'])->name('inicio');
+Route::get('/querySQL', [MainController::class, 'querySQL'])->name('querySQL');
 
 Route::resource('articulos', 'App\Http\Controllers\ArticuloController');

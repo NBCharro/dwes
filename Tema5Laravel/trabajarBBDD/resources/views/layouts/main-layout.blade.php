@@ -28,6 +28,9 @@
             <a class="navbar-brand" href="{{ route('articulos.create') }}">
                 Nuevo
             </a>
+            <a class="navbar-brand" href="{{ route('querySQL') }}">
+                Querys
+            </a>
         </nav>
         @yield('content-area')
     </div>
