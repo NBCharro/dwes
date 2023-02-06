@@ -1,19 +1,22 @@
 <?php
 require_once("./php/functions.php");
+$periodicoAnterior = "Todas";
 if (isset($_REQUEST['periodico'])) {
     $periodico = $_REQUEST['periodico'];
     switch ($periodico) {
         case 'El Pais':
             $noticias = getElPaisXML();
+            $periodicoAnterior = "El Pais";
             break;
         case 'El Mundo':
             $noticias = getElMundoXML();
+            $periodicoAnterior = "El Mundo";
             break;
         case 'Diario de Leon':
             $noticias = getDiarioDeLeonXML();
+            $periodicoAnterior = "Diario de Leon";
             break;
         default:
-            # code...
             break;
     }
 } else {
@@ -35,10 +38,10 @@ if (isset($_REQUEST['periodico'])) {
     <h1>Ultimas noticias</h1>
     <form action="" method="post">
         <select class="form-select" aria-label="Default select example" onchange="this.form.submit()" name="periodico">
-            <option>Todas</option>
-            <option>El Pais</option>
-            <option>El Mundo</option>
-            <option>Diario de Leon</option>
+            <option <?php $periodicoAnterior == "Todas" ? "selected" : "" ?>>Todas</option>
+            <option <?php $periodicoAnterior == "El Pais" ? "selected" : "" ?>>El Pais</option>
+            <option <?php $periodicoAnterior == "El Mundo" ? "selected" : "" ?>>El Mundo</option>
+            <option <?php $periodicoAnterior == "Diario de Leon" ? "selected" : "" ?>>Diario de Leon</option>
         </select>
     </form>
     <table class="table table-hover table-striped">
