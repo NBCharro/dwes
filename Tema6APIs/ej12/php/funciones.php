@@ -4,12 +4,18 @@ define('USER', 'inmuebles');
 define('PASSWORD', 'inmuebles');
 define('BD', 'inmuebles');
 
-function obtenerViviendas()
+function obtenerViviendas($tipo, $localidad)
 {
 	$viviendas = false;
 	try {
 		$conection = new mysqli(HOST, USER, PASSWORD, BD);
 		$consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
+		if ($tipo != "Todas") {
+			$consultaViviendas .= " AND `tipo` = '$tipo'";
+		}
+		if ($localidad != "Todas") {
+			$consultaViviendas .= " AND `localidad` = '$localidad'";
+		}
 		$viviendasDatos = mysqli_query($conection, $consultaViviendas);
 		mysqli_close($conection);
 		if (mysqli_num_rows($viviendasDatos) > 0) {
@@ -22,6 +28,57 @@ function obtenerViviendas()
 	}
 	return $viviendas;
 }
+
+if (isset($_REQUEST['guardarVivienda'])) {
+	// echo '<pre>';
+	// print_r($_REQUEST);
+	// echo '</pre>';
+	$viviendaNueva = [
+		'tipo' => $_REQUEST['tipo'],
+		'direccion' => $_REQUEST['direccion'],
+		'latitud' => $_REQUEST['latitud'],
+		'longitud' => $_REQUEST['longitud'],
+		'descripcion' => $_REQUEST['descripcion'],
+		'vivienda' => $_REQUEST['vivienda'],
+	];
+	$agregado = agregarDatos($viviendaNueva);
+	if ($agregado) {
+		header('Location: ../agregar.php?codigo=exito');
+	} else {
+		header('Location: ../agregar.php?codigo=error');
+	}
+}
+
+function agregarDatos($viviendaNueva)
+{
+	$agregado = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$tipo = $viviendaNueva['tipo'];
+		$direccion = $viviendaNueva['direccion'];
+		$latitud = $viviendaNueva['latitud'];
+		$longitud = $viviendaNueva['longitud'];
+		$descripcion = $viviendaNueva['descripcion'];
+		$vivienda = $viviendaNueva['vivienda'];
+		$consultaSQL = "INSERT INTO `viviendas`(`tipo`, `direccion`, `localidad`, `lat`, `lon`, `descripcion`, `vivienda`)
+		VALUES('$tipo','$direccion','$latitud','$longitud','$descripcion','$vivienda')";
+		$result = $conection->query($consultaSQL);
+		mysqli_close($conection);
+		if ($result) {
+			$agregado = true;
+		}
+	} catch (mysqli_sql_exception $e) {
+		// echo $e->getMessage();
+		$agregado = "No se han podido agregar los datos. Error: " . $e->getMessage();
+	}
+	return $agregado;
+}
+
+
+
+
+
+
 
 
 
