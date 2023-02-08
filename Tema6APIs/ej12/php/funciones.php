@@ -6,26 +6,27 @@ define('BD', 'inmuebles');
 
 function obtenerViviendas()
 {
-    $viviendas = false;
-    try {
-        $conection = new mysqli(HOST, USER, PASSWORD, BD);
-        $consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
-        $viviendasDatos = mysqli_query($conection, $consultaViviendas);
-        mysqli_close($conection);
-        if (mysqli_num_rows($viviendasDatos) > 0) {
-            $viviendas = array();
-            while ($vivienda = mysqli_fetch_assoc($viviendasDatos)) {
-                $viviendas[] = $vivienda;
-            }
-        }
-    } catch (mysqli_sql_exception $e) {
-    }
-    return $viviendas;
+	$viviendas = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
+		$viviendasDatos = mysqli_query($conection, $consultaViviendas);
+		mysqli_close($conection);
+		if (mysqli_num_rows($viviendasDatos) > 0) {
+			$viviendas = array();
+			while ($vivienda = mysqli_fetch_assoc($viviendasDatos)) {
+				$viviendas[] = $vivienda;
+			}
+		}
+	} catch (mysqli_sql_exception $e) {
+	}
+	return $viviendas;
 }
 
 
-// INSERT INTO 'viviendas' ('id', 'tipo', 'direccion', 'localidad','lat','lon', 'vivienda', 'descripcion') VALUES
-// (1, 'venta', 'Calle Frontón, 7', 'León','42.3528934','-3.6723888', 'piso', 'vivienda libre, de 85 m2 útiles 95 construidos, tres dormitorios el principal con empotrados y baño incorporado, baño salón y cocina amueblada.'),
+
+// INSERT INTO `viviendas` (`id`, `tipo`, `direccion`, `localidad`,`lat`,`lon`, `vivienda`, `descripcion`) VALUES
+// (1, 'venta', 'Calle Leopoldo Panero, 6', 'León','42.59381','-5.5632198', 'piso', 'vivienda libre, de 85 m2 útiles 95 construidos, tres dormitorios el principal con empotrados y baño incorporado, baño salón y cocina amueblada.'),
 // (2, 'alquiler', 'Avenida Doctor Fleming, 24', 'León','42.597865049999996','-5.5856809484869965', 'piso', 'Apartamento céntrico. Calefacción gasoil. Gastos de comunidad incluidos. Exterior. Soleado. Terraza. '),
 // (3, 'venta', 'Calle González de Lama, 2', 'León', '42.6021761','-5.5647438','piso', 'Oportunidad, Apartamento para reformar integralmente con terraza y vistas panorámicas.'),
 // (4, 'alquiler', 'Calle Violeta, 4', 'Trobajo del camino', '42.6006657','-5.6112042','piso', 'Piso exterior, magníficas calidades, luminoso, reformado y amueblado íntegramente, zona San Mamés- La Palomera, próximo a la universidad; distribuido en 3 dormitorios con armarios empotrados, dos baños en Silestone (1 con bañera y 1 con plato de ducha), cocina, salón, dos terrazas (una de ellas con superficie de 26 m2)'),
