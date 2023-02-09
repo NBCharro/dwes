@@ -57,6 +57,10 @@
                 <input type="text" class="form-control" name="direccion" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="mb-3">
+                <label for="localidad" class="form-label">Localidad</label>
+                <input type="text" class="form-control" name="localidad" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="mb-3">
                 <label for="latitud" class="form-label">Latitud</label>
                 <input type="text" class="form-control" name="latitud" aria-label="Username" aria-describedby="basic-addon1">
             </div>

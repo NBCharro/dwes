@@ -1,5 +1,7 @@
 <?php
 require_once "php/funciones.php";
+$localidades = obtenerLocalidades();
+
 $localidad = 'Todas';
 $tipo = 'Todas';
 if (isset($_REQUEST['tipo'])) {
@@ -9,6 +11,9 @@ if (isset($_REQUEST['localidad'])) {
 	$localidad = $_REQUEST['localidad'];
 }
 $viviendas = obtenerViviendas($tipo, $localidad);
+
+$latitud = obtenerLatitudCentroMapa($viviendas);
+$longitud = obtenerLongitudCentroMapa($viviendas);
 ?>
 
 <!DOCTYPE html>
@@ -55,9 +60,12 @@ $viviendas = obtenerViviendas($tipo, $localidad);
 				<div class="col">
 					<select class="form-select" aria-label="Default select example" name="localidad" onchange="this.form.submit()">
 						<option selected>Todas</option>
-						<option <?php echo $localidad == 'León' ? "selected" : "" ?>>León</option>
-						<option <?php echo $localidad == 'Trobajo del camino' ? "selected" : "" ?>>Trobajo del camino</option>
-						<option <?php echo $localidad == 'Villabalter' ? "selected" : "" ?>>Villabalter</option>
+						<?php
+						foreach ($localidades as $localidadArray) {
+							$selected = $localidad == $localidadArray ? "selected" : "";
+							echo "<option $selected>$localidadArray</option>";
+						}
+						?>
 					</select>
 				</div>
 			</div>
@@ -75,8 +83,8 @@ $viviendas = obtenerViviendas($tipo, $localidad);
 	function initMap() {
 		let map = new google.maps.Map(document.getElementById("map"), {
 			center: {
-				lat: 40,
-				lng: -4
+				lat: <?php echo $latitud; ?>,
+				lng: <?php echo $longitud; ?>
 			},
 			zoom: 6.5,
 		});
@@ -85,13 +93,14 @@ $viviendas = obtenerViviendas($tipo, $localidad);
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdPERm4mlw0gXnacOamDfcEqtq_pLjf3U&callback=initMap">
 </script>
 <script>
-	console.log(<?php echo json_encode($viviendas); ?>);
+	console.log("Latitud: <?php echo $latitud; ?>");
+	console.log("Longitud: <?php echo $longitud; ?>");
 
 	function initMap() {
 		let map = new google.maps.Map(document.getElementById("map"), {
 			center: {
-				lat: 42.6,
-				lng: -5.6
+				lat: <?php echo $latitud; ?>,
+				lng: <?php echo $longitud; ?>
 			},
 			zoom: 13.5,
 			mapTypeId: 'terrain',
@@ -110,11 +119,11 @@ $viviendas = obtenerViviendas($tipo, $localidad);
 				$icono += "Alquiler";
 			}
 			$icono += ".png";
-			let nombre = points[i].direccion;
+			let direccion = points[i].direccion;
 			let latLng = new google.maps.LatLng(points[i].lat, points[i].lon);
 			let marker = new google.maps.Marker({
 				position: latLng,
-				title: nombre,
+				title: direccion,
 				map: map,
 				icon: $icono,
 			});

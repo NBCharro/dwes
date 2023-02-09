@@ -30,14 +30,12 @@ function obtenerViviendas($tipo, $localidad)
 }
 
 if (isset($_REQUEST['guardarVivienda'])) {
-	// echo '<pre>';
-	// print_r($_REQUEST);
-	// echo '</pre>';
 	$viviendaNueva = [
 		'tipo' => $_REQUEST['tipo'],
 		'direccion' => $_REQUEST['direccion'],
 		'latitud' => $_REQUEST['latitud'],
 		'longitud' => $_REQUEST['longitud'],
+		'localidad' => $_REQUEST['localidad'],
 		'descripcion' => $_REQUEST['descripcion'],
 		'vivienda' => $_REQUEST['vivienda'],
 	];
@@ -58,10 +56,11 @@ function agregarDatos($viviendaNueva)
 		$direccion = $viviendaNueva['direccion'];
 		$latitud = $viviendaNueva['latitud'];
 		$longitud = $viviendaNueva['longitud'];
+		$localidad = $viviendaNueva['localidad'];
 		$descripcion = $viviendaNueva['descripcion'];
 		$vivienda = $viviendaNueva['vivienda'];
 		$consultaSQL = "INSERT INTO `viviendas`(`tipo`, `direccion`, `localidad`, `lat`, `lon`, `descripcion`, `vivienda`)
-		VALUES('$tipo','$direccion','$latitud','$longitud','$descripcion','$vivienda')";
+		VALUES('$tipo','$direccion','$localidad','$latitud','$longitud','$descripcion','$vivienda')";
 		$result = $conection->query($consultaSQL);
 		mysqli_close($conection);
 		if ($result) {
@@ -74,10 +73,56 @@ function agregarDatos($viviendaNueva)
 	return $agregado;
 }
 
+function obtenerLocalidades()
+{
+	$localidades = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$consultaLocalidades = "SELECT DISTINCT `localidad` FROM `viviendas` WHERE 1";
+		$localidadesDatos = mysqli_query($conection, $consultaLocalidades);
+		mysqli_close($conection);
+		if (mysqli_num_rows($localidadesDatos) > 0) {
+			$localidades = array();
+			while ($vivienda = mysqli_fetch_assoc($localidadesDatos)) {
+				$localidades[] = $vivienda['localidad'];
+			}
+		}
+	} catch (mysqli_sql_exception $e) {
+	}
+	return $localidades;
+}
 
+function obtenerLatitudCentroMapa($viviendas)
+{
+	$latitudMayor = $viviendas[0]['lat'];
+	$latitudMenor = $viviendas[0]['lat'];
+	foreach ($viviendas as $vivienda) {
+		if ($vivienda['lat'] > $latitudMayor) {
+			$latitudMayor = $vivienda['lat'];
+		}
+		if ($vivienda['lat'] < $latitudMenor) {
+			$latitudMenor = $vivienda['lat'];
+		}
+	}
+	$mitadLatitud = ($latitudMayor + $latitudMenor) / 2;
+	return $mitadLatitud;
+}
 
-
-
+function obtenerLongitudCentroMapa($viviendas)
+{
+	$longitudMayor = $viviendas[0]['lon'];
+	$longitudMenor = $viviendas[0]['lon'];
+	foreach ($viviendas as $vivienda) {
+		if ($vivienda['lon'] > $longitudMayor) {
+			$longitudMayor = $vivienda['lon'];
+		}
+		if ($vivienda['lon'] < $longitudMenor) {
+			$longitudMenor = $vivienda['lon'];
+		}
+	}
+	$mitadLongitud = ($longitudMayor + $longitudMenor) / 2;
+	return $mitadLongitud;
+}
 
 
 
