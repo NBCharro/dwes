@@ -4,25 +4,22 @@ if (!isset($_GET['code'])) {
     die();
 }
 require_once("./php/funciones.php");
+require_once("./auth/sesion.php");
 
-$codigoSpotify = $_GET['code'];
 
-if (isset($_REQUEST['buscarArtista'])) {
+if (isset($_REQUEST['artistaBuscado'])) {
     $artistaBuscado = $_REQUEST['artistaBuscado'];
-    $discografia = obtenerDiscografia('0k17h0D3J5VfsdmQ1iZtE9', $codigoSpotify);
+
+    $api = new SpotifyWebAPI\SpotifyWebAPI();
+    $session->requestAccessToken($_GET['code']);
+    $api->setAccessToken($session->getAccessToken());
+
+    $datosArtista = buscarArtista($api, $artistaBuscado);
+
+    $discografia = obtenerDiscografia($api, $datosArtista['id']);
     echo '<pre>';
     print_r($discografia);
     echo '</pre>';
-
-
-    // $datosArtista = buscarArtista($artistaBuscado, $codigoSpotify);
-    // echo '<pre>';
-    // print_r($datosArtista);
-    // echo '</pre>';
-    // $discografia = obtenerDiscografia($datosArtista['id'], $codigoSpotify);
-    // echo '<pre>';
-    // print_r($discografia);
-    // echo '</pre>';
 }
 ?>
 
@@ -41,39 +38,63 @@ if (isset($_REQUEST['buscarArtista'])) {
 <body>
     <div class="container">
         <h2>Buscar artistas</h2>
-        <form action="" method="post">
+        <form action="#" method="post">
             <div class="mb-3">
                 <label for="artistaBuscado" class="form-label">Buscar Artista</label>
                 <input type="text" class="form-control" name="artistaBuscado" aria-label="Username" aria-describedby="basic-addon1">
             </div>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit" name="buscarArtista">Buscar Artista</button>
-            </div>
         </form>
     </div>
     <hr>
-    <div class="container">
-        <h2>Informacion del artista</h2>
-        <div class="container text-center">
-            <div class="row align-items-center">
-                <div class="col">
-                    <img src="<?php echo $datosArtista['imagen'] ?>" alt="" width="200px">
-                </div>
-                <div class="col">
-                    <h3><?php echo $datosArtista['nombre'] ?></h3>
-                    <p>Seguidores: <?php echo $datosArtista['seguidores'] ?></p>
-                    <input type="range" max="3000000" value="<?php echo $datosArtista['seguidores'] ?>" class="form-label">
-                    <p>Popularidad: <?php echo $datosArtista['popularidad'] ?></p>
-                    <input type="range" max="100" value="<?php echo $datosArtista['popularidad'] ?>" class="form-label">
-                    <br><a href="<?php echo $datosArtista['url'] ?>" target="_blank" rel="noopener noreferrer">Enlace</a>
+    <?php
+    if (isset($_REQUEST['artistaBuscado'])) {
+    ?>
+        <div class="container">
+            <h2>Informacion del artista</h2>
+            <div class="container text-center">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <img src="<?php echo $datosArtista['imagen'] ?>" alt="" width="200px">
+                    </div>
+                    <div class="col">
+                        <h3><?php echo $datosArtista['nombre'] ?></h3>
+                        <p>Seguidores: <?php echo $datosArtista['seguidores'] ?></p>
+                        <input type="range" max="3000000" value="<?php echo $datosArtista['seguidores'] ?>" class="form-label">
+                        <p>Popularidad: <?php echo $datosArtista['popularidad'] ?></p>
+                        <input type="range" max="100" value="<?php echo $datosArtista['popularidad'] ?>" class="form-label">
+                        <br><a href="<?php echo $datosArtista['url'] ?>" target="_blank" rel="noopener noreferrer">Enlace</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="container">
-        <h2>Discografia</h2>
-    </div>
+        <hr>
+        <div class="container">
+            <h2>Discografia</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Tipo</th>
+                        <th>Titulo</th>
+                        <th>Lanzamiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($discografia as $disco) {
+                        echo "<tr>";
+                        echo "<td><img src='{$disco['imagen']}' alt='' width='150px'></td>";
+                        echo "<td>{$disco['tipo']}</td>";
+                        echo "<td>{$disco['titulo']}</td>";
+                        echo "<td>{$disco['lanzamiento']}</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    <?php
+    } ?>
 </body>
 
 </html>

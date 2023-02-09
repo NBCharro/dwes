@@ -1,20 +1,13 @@
 <?php
 require_once './vendor/autoload.php';
-require_once './auth/sesion.php';
 
-function buscarArtista($artista, $codigoSpotify)
+function buscarArtista($api, $artista)
 {
     $artistaBuscado = false;
-    $api = new SpotifyWebAPI\SpotifyWebAPI();
-    $session = new SpotifyWebAPI\Session(
-        '6f13e9fdb16c44ac889c8c76b08d2c5b',
-        '0c23ca9cc70c404dbc00ad901673b596',
-        'http://localhost/dwes/Tema6APIs/ej13/'
-    );
-    $session->requestAccessToken($codigoSpotify);
-    $api->setAccessToken($session->getAccessToken());
+
     $options = array('limit' => 5);
     $results = $api->search($artista, 'artist', $options);
+
     if (count($results->artists->items) > 0) {
         $data = $results->artists->items[0];
         $artistaBuscado = [
@@ -26,33 +19,25 @@ function buscarArtista($artista, $codigoSpotify)
             'popularidad' => $data->popularity,
         ];
     }
+
     return $artistaBuscado;
 }
 
-function obtenerDiscografia($idArtista, $codigoSpotify)
+function obtenerDiscografia($api, $id)
 {
     $discografia = false;
-    $api = new SpotifyWebAPI\SpotifyWebAPI();
-    $session = new SpotifyWebAPI\Session(
-        '6f13e9fdb16c44ac889c8c76b08d2c5b',
-        '0c23ca9cc70c404dbc00ad901673b596',
-        'http://localhost/dwes/Tema6APIs/ej13/'
-    );
-    $session->requestAccessToken($codigoSpotify);
-    $api->setAccessToken($session->getAccessToken());
-    // $options = array();
-    // $results = $api->search("Pink Floyd", 'artist', $options);
-    // $data = $results->artists->items[0];
-    // $id = $data->id;
-    // Busco los albumes que tiene mediante su ID
-    $albums = $api->getArtistAlbums($idArtista);
+
+    $albums = $api->getArtistAlbums($id);
+
     foreach ($albums->items as $album) {
-        $discografia[] =[
-            "imagen"=>$album->images[0];
-            "tipo"=>$album->type;
-            "titulo"=>$album->name;
-            "lanzamiento"=>$album->release_date;
+        $discografia[] = [
+            "imagen" => $album->images[0]->url,
+            "tipo" => $album->type,
+            "titulo" => $album->name,
+            "lanzamiento" => $album->release_date,
+            "url" => $album->artists[0]->external_urls->spotify,
         ];
     }
+
     return $discografia;
 }
