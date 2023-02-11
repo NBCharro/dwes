@@ -1,14 +1,21 @@
 <?php
 require_once "php/funciones.php";
-$viviendas = obtenerViviendas();
-$viviendasJSON = json_encode($viviendas);
-// echo '<pre>';
-// print_r($viviendas[0]);
-// echo '</pre>';
-// echo '<pre>';
-// print_r($viviendasJSON);
-// echo '</pre>';
+$localidades = obtenerLocalidades();
+
+$localidad = 'Todas';
+$tipo = 'Todas';
+if (isset($_REQUEST['tipo'])) {
+	$tipo = $_REQUEST['tipo'];
+}
+if (isset($_REQUEST['localidad'])) {
+	$localidad = $_REQUEST['localidad'];
+}
+$viviendas = obtenerViviendas($tipo, $localidad);
+
+$latitud = obtenerLatitudCentroMapa($viviendas);
+$longitud = obtenerLongitudCentroMapa($viviendas);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,15 +30,51 @@ $viviendasJSON = json_encode($viviendas);
 </head>
 
 <body>
-	<header class="container-fluid bg-primary text-white py-2">
-		<h1>Viviendas</h1>
+	<header class="container-fluid py-2">
+		<h1>Inmobiliaria</h1>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<div id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Mapa</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./agregar.php">Formulario</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 	</header>
+	<form>
+		<div class="container text-center">
+			<div class="row align-items-center">
+				<div class="col">
+					<select class="form-select" aria-label="Default select example" name="tipo" onchange="this.form.submit()">
+						<option selected>Todas</option>
+						<option <?php echo $tipo == 'Alquiler' ? "selected" : "" ?>>Alquiler</option>
+						<option <?php echo $tipo == 'Venta' ? "selected" : "" ?>>Venta</option>
+					</select>
+				</div>
+				<div class="col">
+					<select class="form-select" aria-label="Default select example" name="localidad" onchange="this.form.submit()">
+						<option selected>Todas</option>
+						<?php
+						foreach ($localidades as $localidadArray) {
+							$selected = $localidad == $localidadArray ? "selected" : "";
+							echo "<option $selected>$localidadArray</option>";
+						}
+						?>
+					</select>
+				</div>
+			</div>
+		</div>
+	</form>
 	<!-- Necesitamos un div con id='map' -->
-	<div id="map" class="container-fluid">
-
-	</div>
+	<div id="map" class="container-fluid"></div>
 	<footer class="container-fluid bg-primary text-center text-white py-1">
-		<p>&copy; Oscar Hernando Tejedor</p>
+		<p>&copy; Nelson Blanco Charro</p>
 	</footer>
 </body>
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p">
@@ -40,8 +83,8 @@ $viviendasJSON = json_encode($viviendas);
 	function initMap() {
 		let map = new google.maps.Map(document.getElementById("map"), {
 			center: {
-				lat: 40,
-				lng: -4
+				lat: <?php echo $latitud; ?>,
+				lng: <?php echo $longitud; ?>
 			},
 			zoom: 6.5,
 		});
@@ -50,25 +93,39 @@ $viviendasJSON = json_encode($viviendas);
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdPERm4mlw0gXnacOamDfcEqtq_pLjf3U&callback=initMap">
 </script>
 <script>
-	console.log(<?php echo json_encode($viviendas); ?>);
+	console.log("Latitud: <?php echo $latitud; ?>");
+	console.log("Longitud: <?php echo $longitud; ?>");
 
 	function initMap() {
 		let map = new google.maps.Map(document.getElementById("map"), {
 			center: {
-				lat: 42.6,
-				lng: -5.6
+				lat: <?php echo $latitud; ?>,
+				lng: <?php echo $longitud; ?>
 			},
 			zoom: 13.5,
 			mapTypeId: 'terrain',
 		});
 		let points = JSON.parse('<?php echo json_encode($viviendas); ?>');
 		for (var i = 0; i < points.length; i++) {
-			let nombre = points[i].direccion;
+			$icono = "./icons/";
+			if (points[i].vivienda == "piso") {
+				$icono += "piso";
+			} else {
+				$icono += "casa";
+			}
+			if (points[i].tipo == "venta") {
+				$icono += "Venta";
+			} else {
+				$icono += "Alquiler";
+			}
+			$icono += ".png";
+			let direccion = points[i].direccion;
 			let latLng = new google.maps.LatLng(points[i].lat, points[i].lon);
 			let marker = new google.maps.Marker({
 				position: latLng,
-				title: nombre,
+				title: direccion,
 				map: map,
+				icon: $icono,
 			});
 		}
 	}

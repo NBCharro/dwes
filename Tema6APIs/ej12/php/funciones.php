@@ -4,12 +4,18 @@ define('USER', 'inmuebles');
 define('PASSWORD', 'inmuebles');
 define('BD', 'inmuebles');
 
-function obtenerViviendas()
+function obtenerViviendas($tipo, $localidad)
 {
 	$viviendas = false;
 	try {
 		$conection = new mysqli(HOST, USER, PASSWORD, BD);
 		$consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
+		if ($tipo != "Todas") {
+			$consultaViviendas .= " AND `tipo` = '$tipo'";
+		}
+		if ($localidad != "Todas") {
+			$consultaViviendas .= " AND `localidad` = '$localidad'";
+		}
 		$viviendasDatos = mysqli_query($conection, $consultaViviendas);
 		mysqli_close($conection);
 		if (mysqli_num_rows($viviendasDatos) > 0) {
@@ -22,6 +28,102 @@ function obtenerViviendas()
 	}
 	return $viviendas;
 }
+
+if (isset($_REQUEST['guardarVivienda'])) {
+	$viviendaNueva = [
+		'tipo' => $_REQUEST['tipo'],
+		'direccion' => $_REQUEST['direccion'],
+		'latitud' => $_REQUEST['latitud'],
+		'longitud' => $_REQUEST['longitud'],
+		'localidad' => $_REQUEST['localidad'],
+		'descripcion' => $_REQUEST['descripcion'],
+		'vivienda' => $_REQUEST['vivienda'],
+	];
+	$agregado = agregarDatos($viviendaNueva);
+	if ($agregado) {
+		header('Location: ../agregar.php?codigo=exito');
+	} else {
+		header('Location: ../agregar.php?codigo=error');
+	}
+}
+
+function agregarDatos($viviendaNueva)
+{
+	$agregado = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$tipo = $viviendaNueva['tipo'];
+		$direccion = $viviendaNueva['direccion'];
+		$latitud = $viviendaNueva['latitud'];
+		$longitud = $viviendaNueva['longitud'];
+		$localidad = $viviendaNueva['localidad'];
+		$descripcion = $viviendaNueva['descripcion'];
+		$vivienda = $viviendaNueva['vivienda'];
+		$consultaSQL = "INSERT INTO `viviendas`(`tipo`, `direccion`, `localidad`, `lat`, `lon`, `descripcion`, `vivienda`)
+		VALUES('$tipo','$direccion','$localidad','$latitud','$longitud','$descripcion','$vivienda')";
+		$result = $conection->query($consultaSQL);
+		mysqli_close($conection);
+		if ($result) {
+			$agregado = true;
+		}
+	} catch (mysqli_sql_exception $e) {
+		// echo $e->getMessage();
+		$agregado = "No se han podido agregar los datos. Error: " . $e->getMessage();
+	}
+	return $agregado;
+}
+
+function obtenerLocalidades()
+{
+	$localidades = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$consultaLocalidades = "SELECT DISTINCT `localidad` FROM `viviendas` WHERE 1";
+		$localidadesDatos = mysqli_query($conection, $consultaLocalidades);
+		mysqli_close($conection);
+		if (mysqli_num_rows($localidadesDatos) > 0) {
+			$localidades = array();
+			while ($vivienda = mysqli_fetch_assoc($localidadesDatos)) {
+				$localidades[] = $vivienda['localidad'];
+			}
+		}
+	} catch (mysqli_sql_exception $e) {
+	}
+	return $localidades;
+}
+
+function obtenerLatitudCentroMapa($viviendas)
+{
+	$latitudMayor = $viviendas[0]['lat'];
+	$latitudMenor = $viviendas[0]['lat'];
+	foreach ($viviendas as $vivienda) {
+		if ($vivienda['lat'] > $latitudMayor) {
+			$latitudMayor = $vivienda['lat'];
+		}
+		if ($vivienda['lat'] < $latitudMenor) {
+			$latitudMenor = $vivienda['lat'];
+		}
+	}
+	$mitadLatitud = ($latitudMayor + $latitudMenor) / 2;
+	return $mitadLatitud;
+}
+
+function obtenerLongitudCentroMapa($viviendas)
+{
+	$longitudMayor = $viviendas[0]['lon'];
+	$longitudMenor = $viviendas[0]['lon'];
+	foreach ($viviendas as $vivienda) {
+		if ($vivienda['lon'] > $longitudMayor) {
+			$longitudMayor = $vivienda['lon'];
+		}
+		if ($vivienda['lon'] < $longitudMenor) {
+			$longitudMenor = $vivienda['lon'];
+		}
+	}
+	$mitadLongitud = ($longitudMayor + $longitudMenor) / 2;
+	return $mitadLongitud;
+}
+
 
 
 
