@@ -3,12 +3,14 @@ if (!isset($_GET['code'])) {
     header('Location: auth/auth.php');
     die();
 }
+session_start();
 require_once("./php/funciones.php");
 require_once("./auth/sesion.php");
 
 
 if (isset($_REQUEST['artistaBuscado'])) {
     $artistaBuscado = $_REQUEST['artistaBuscado'];
+    $_SESSION['artistaBuscado'] = $artistaBuscado;
 
     $api = new SpotifyWebAPI\SpotifyWebAPI();
     $session->requestAccessToken($_GET['code']);
@@ -17,9 +19,9 @@ if (isset($_REQUEST['artistaBuscado'])) {
     $datosArtista = buscarArtista($api, $artistaBuscado);
 
     $discografia = obtenerDiscografia($api, $datosArtista['id']);
-    echo '<pre>';
-    print_r($discografia);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($discografia);
+    // echo '</pre>';
 }
 ?>
 
@@ -41,7 +43,7 @@ if (isset($_REQUEST['artistaBuscado'])) {
         <form action="#" method="post">
             <div class="mb-3">
                 <label for="artistaBuscado" class="form-label">Buscar Artista</label>
-                <input type="text" class="form-control" name="artistaBuscado" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" name="artistaBuscado" aria-label="Username" aria-describedby="basic-addon1" value="<?php echo isset($artistaBuscado) ? $artistaBuscado : "" ?>">
             </div>
         </form>
     </div>
