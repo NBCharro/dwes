@@ -4,8 +4,6 @@ define('USER', 'inmuebles');
 define('PASSWORD', 'inmuebles');
 define('BD', 'inmuebles');
 
-// 19, Calle las Campanas, San Andrés del Rabanedo
-
 if (isset($_REQUEST['guardarVivienda'])) {
 	$tipo = $_REQUEST['tipo'];
 	$tipoDeVia = $_REQUEST['tipoDeVia'];
@@ -58,9 +56,6 @@ function agregarDatos($viviendaNueva)
 		$consultaSQL = "INSERT INTO `viviendas`(`tipo`, `direccion`, `localidad`, `lat`, `lon`, `descripcion`, `vivienda`)
 		VALUES('$tipo','$direccion','$localidad','$latitud','$longitud','$descripcion','$vivienda')";
 		$result = $conection->query($consultaSQL);
-		echo '<pre>';
-		print_r($result);
-		echo '</pre>';
 		mysqli_close($conection);
 		if ($result) {
 			$agregado = true;
