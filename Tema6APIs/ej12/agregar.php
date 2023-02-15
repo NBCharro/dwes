@@ -1,17 +1,3 @@
-<?php
-$dir = "125,avenida+romeral,villabalter";
-$url = "https://nominatim.openstreetmap.org/search.php?q={$dir}&format=json&limit=1";
-$opts = array('http' => array('header' => array("Referer: $url\r\n")));
-$context = stream_context_create($opts);
-$file = file_get_contents($url, false, $context);
-$dirArray = json_decode($file, true);
-echo '<pre>';
-print_r($dirArray);
-echo '</pre>';
-echo "<p>{$dirArray[0]['lat']}</p>";
-echo "<p>{$dirArray[0]['lon']}</p>";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,14 +53,18 @@ echo "<p>{$dirArray[0]['lon']}</p>";
 				</select>
 			</div>
 			<div class="mb-3">
-				<label for="direccion" class="form-label">Direccion</label>
-				<input type="text" class="form-control" name="direccion" aria-label="Username" aria-describedby="basic-addon1">
+				<label for="localidad" class="form-label">Localidad</label>
+				<input type="text" class="form-control" name="localidad" aria-label="Username" aria-describedby="basic-addon1">
 			</div>
 			<div class="mb-3 text-center">
 				<div class="row align-items-start">
 					<div class="col">
 						<label for="tipoDeVia" class="form-label">Tipo de via</label>
-						<input type="text" class="form-control" name="tipoDeVia" aria-label="Username" aria-describedby="basic-addon1">
+						<select class="form-select" aria-label="Default select example" name="tipoDeVia">
+							<option>Calle</option>
+							<option>Avenida</option>
+							<option>Plaza</option>
+						</select>
 					</div>
 					<div class="col">
 						<label for="nombreVia" class="form-label">Nombre de la via</label>

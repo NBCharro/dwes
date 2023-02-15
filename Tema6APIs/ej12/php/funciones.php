@@ -4,40 +4,36 @@ define('USER', 'inmuebles');
 define('PASSWORD', 'inmuebles');
 define('BD', 'inmuebles');
 
-function obtenerViviendas($tipo, $localidad)
-{
-	$viviendas = false;
-	try {
-		$conection = new mysqli(HOST, USER, PASSWORD, BD);
-		$consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
-		if ($tipo != "Todas") {
-			$consultaViviendas .= " AND `tipo` = '$tipo'";
-		}
-		if ($localidad != "Todas") {
-			$consultaViviendas .= " AND `localidad` = '$localidad'";
-		}
-		$viviendasDatos = mysqli_query($conection, $consultaViviendas);
-		mysqli_close($conection);
-		if (mysqli_num_rows($viviendasDatos) > 0) {
-			$viviendas = array();
-			while ($vivienda = mysqli_fetch_assoc($viviendasDatos)) {
-				$viviendas[] = $vivienda;
-			}
-		}
-	} catch (mysqli_sql_exception $e) {
-	}
-	return $viviendas;
-}
+// 19, Calle las Campanas, San Andrés del Rabanedo
 
 if (isset($_REQUEST['guardarVivienda'])) {
+	$tipo = $_REQUEST['tipo'];
+	$tipoDeVia = $_REQUEST['tipoDeVia'];
+	$nombreVia = $_REQUEST['nombreVia'];
+	$numeroVia = $_REQUEST['numeroVia'];
+	$localidad = $_REQUEST['localidad'];
+	$vivienda = $_REQUEST['vivienda'];
+	$descripcion = $_REQUEST['descripcion'];
+	// Obtener latitud y longitud
+	$direccionBusquedaAPI = "$numeroVia,$tipoDeVia+$nombreVia,$localidad";
+	$direccionBusquedaAPI = str_replace(" ", "+", $direccionBusquedaAPI);
+	$url = "https://nominatim.openstreetmap.org/search.php?q={$direccionBusquedaAPI}&format=json&limit=1";
+	$opts = array('http' => array('header' => array("Referer: $url\r\n")));
+	$context = stream_context_create($opts);
+	$file = file_get_contents($url, false, $context);
+	$dirArray = json_decode($file, true);
+	$latitud = $dirArray[0]['lat'];
+	$lontigud = $dirArray[0]['lon'];
+	// Guardar datos
+	$direccionBD = "$tipoDeVia $nombreVia, $numeroVia";
 	$viviendaNueva = [
-		'tipo' => $_REQUEST['tipo'],
-		'direccion' => $_REQUEST['direccion'],
-		'latitud' => $_REQUEST['latitud'],
-		'longitud' => $_REQUEST['longitud'],
-		'localidad' => $_REQUEST['localidad'],
-		'descripcion' => $_REQUEST['descripcion'],
-		'vivienda' => $_REQUEST['vivienda'],
+		'tipo' => $tipo,
+		'direccion' => $direccionBD,
+		'latitud' => $latitud,
+		'longitud' => $lontigud,
+		'localidad' => $localidad,
+		'descripcion' => $descripcion,
+		'vivienda' => $vivienda,
 	];
 	$agregado = agregarDatos($viviendaNueva);
 	if ($agregado) {
@@ -62,6 +58,9 @@ function agregarDatos($viviendaNueva)
 		$consultaSQL = "INSERT INTO `viviendas`(`tipo`, `direccion`, `localidad`, `lat`, `lon`, `descripcion`, `vivienda`)
 		VALUES('$tipo','$direccion','$localidad','$latitud','$longitud','$descripcion','$vivienda')";
 		$result = $conection->query($consultaSQL);
+		echo '<pre>';
+		print_r($result);
+		echo '</pre>';
 		mysqli_close($conection);
 		if ($result) {
 			$agregado = true;
@@ -71,6 +70,31 @@ function agregarDatos($viviendaNueva)
 		$agregado = "No se han podido agregar los datos. Error: " . $e->getMessage();
 	}
 	return $agregado;
+}
+
+function obtenerViviendas($tipo, $localidad)
+{
+	$viviendas = false;
+	try {
+		$conection = new mysqli(HOST, USER, PASSWORD, BD);
+		$consultaViviendas = "SELECT * FROM `viviendas` WHERE 1";
+		if ($tipo != "Todas") {
+			$consultaViviendas .= " AND `tipo` = '$tipo'";
+		}
+		if ($localidad != "Todas") {
+			$consultaViviendas .= " AND `localidad` = '$localidad'";
+		}
+		$viviendasDatos = mysqli_query($conection, $consultaViviendas);
+		mysqli_close($conection);
+		if (mysqli_num_rows($viviendasDatos) > 0) {
+			$viviendas = array();
+			while ($vivienda = mysqli_fetch_assoc($viviendasDatos)) {
+				$viviendas[] = $vivienda;
+			}
+		}
+	} catch (mysqli_sql_exception $e) {
+	}
+	return $viviendas;
 }
 
 function obtenerLocalidades()
