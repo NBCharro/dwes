@@ -79,7 +79,7 @@ $longitud = obtenerLongitudCentroMapa($viviendas);
 </body>
 <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p">
 </script>
-<script>
+<!-- <script>
 	function initMap() {
 		let map = new google.maps.Map(document.getElementById("map"), {
 			center: {
@@ -89,7 +89,7 @@ $longitud = obtenerLongitudCentroMapa($viviendas);
 			zoom: 6.5,
 		});
 	}
-</script>
+</script> -->
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdPERm4mlw0gXnacOamDfcEqtq_pLjf3U&callback=initMap">
 </script>
 <script>
